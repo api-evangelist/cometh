@@ -1,0 +1,97 @@
+# Cometh
+
+## Cometh
+
+- [Cometh Documentation](https://docs.cometh.io/quick-start/cometh-documentation.md)
+- [Getting started](https://docs.cometh.io/quick-start/getting-started.md): Estimated time: 3min
+- [Supported Networks](https://docs.cometh.io/quick-start/supported-networks.md)
+- [Create a Wallet](https://docs.cometh.io/core-features/create-a-wallet.md): Onboard your user with a few lines of code
+- [Send transactions](https://docs.cometh.io/core-features/send-transactions.md): Sending user operations has never been easier
+- [Go Gasless](https://docs.cometh.io/core-features/go-gasless.md)
+- [Sign/Verify a message](https://docs.cometh.io/core-features/sign-verify-a-message.md): You can sign and verify messages in just 1 line of code.
+- [Retrieve a wallet address](https://docs.cometh.io/core-features/retrieve-a-wallet-address.md): Retrieve your user wallet without a backend
+- [Handle owners](https://docs.cometh.io/core-features/handle-owners.md): You can easily add, remove or get all your wallet owners.
+- [Import a safe into connect](https://docs.cometh.io/core-features/import-a-safe-into-connect.md): Import safe into Cometh Connect
+- [Session Keys](https://docs.cometh.io/advanced/session-keys.md): No need to sign each transactions !
+- [Tutorial](https://docs.cometh.io/advanced/session-keys/tutorial.md): Example of a session key with an action policy.
+- [Remove a session key](https://docs.cometh.io/advanced/session-keys/remove-a-session-key.md): Remove a permission
+- [Policies](https://docs.cometh.io/advanced/session-keys/policies.md)
+- [Sudo policy](https://docs.cometh.io/advanced/session-keys/policies/sudo-policy.md): The sudo policy gives full permission to the signer. The signer will be able to send any UserOps.
+- [Action policy](https://docs.cometh.io/advanced/session-keys/policies/action-policy.md): The action policy limits the target (either contract or EOA) that the UserOp can interact with.
+- [ERC7579 actions](https://docs.cometh.io/advanced/session-keys/erc7579-actions.md)
+- [7579 Fallback methods](https://docs.cometh.io/advanced/session-keys/erc7579-actions/7579-fallback-methods.md): 7579 methods
+- [Install a module](https://docs.cometh.io/advanced/session-keys/erc7579-actions/install-a-module.md): Installs a ERC-7579 module to the smart account.
+- [Uninstall a Module](https://docs.cometh.io/advanced/session-keys/erc7579-actions/uninstall-a-module.md): Uninstalls a ERC-7579 module from the smart account.
+- [isModuleInstalled](https://docs.cometh.io/advanced/session-keys/erc7579-actions/ismoduleinstalled.md): Checks if an ERC-7579 module is installed on the smart account.
+- [Social recovery](https://docs.cometh.io/advanced/social-recovery.md): How to recover a wallet using recovery
+- [Add a passkey signer on a different OS](https://docs.cometh.io/advanced/add-a-passkey-signer-on-a-different-os.md): Allow your user to access their wallet from several devices with different OS environment
+- [Capabilities](https://docs.cometh.io/advanced/capabilities.md)
+- [sendCalls](https://docs.cometh.io/advanced/capabilities/sendcalls.md)
+- [getCallsStatus](https://docs.cometh.io/advanced/capabilities/getcallsstatus.md)
+- [getCapabilities](https://docs.cometh.io/advanced/capabilities/getcapabilities.md)
+- [grantPermissions](https://docs.cometh.io/advanced/capabilities/grantpermissions.md)
+- [Other signers (Auth Providers)](https://docs.cometh.io/advanced/other-signers-auth-providers.md)
+- [EOA wallets (Metamask, Phantom...)](https://docs.cometh.io/advanced/other-signers-auth-providers/eoa-wallets-metamask-phantom....md)
+- [Magic signer](https://docs.cometh.io/advanced/other-signers-auth-providers/magic-signer.md)
+- [Web3Auth signer](https://docs.cometh.io/advanced/other-signers-auth-providers/web3auth-signer.md)
+- [Turnkey signer](https://docs.cometh.io/advanced/other-signers-auth-providers/turnkey-signer.md)
+- [Privy signer](https://docs.cometh.io/advanced/other-signers-auth-providers/privy-signer.md)
+- [React hooks](https://docs.cometh.io/integrations/react-hooks.md)
+- [ConnectProvider](https://docs.cometh.io/integrations/react-hooks/connectprovider.md)
+- [useAccount](https://docs.cometh.io/integrations/react-hooks/useaccount.md)
+- [useConnect](https://docs.cometh.io/integrations/react-hooks/useconnect.md)
+- [useDisconnect](https://docs.cometh.io/integrations/react-hooks/usedisconnect.md)
+- [useGetGasPrice](https://docs.cometh.io/integrations/react-hooks/usegetgasprice.md)
+- [useSendTransaction](https://docs.cometh.io/integrations/react-hooks/usesendtransaction.md)
+- [useSignMessage](https://docs.cometh.io/integrations/react-hooks/usesignmessage.md)
+- [useVerifyMessage](https://docs.cometh.io/integrations/react-hooks/useverifymessage.md)
+- [useWriteContract](https://docs.cometh.io/integrations/react-hooks/usewritecontract.md)
+- [Handle owners](https://docs.cometh.io/integrations/react-hooks/handle-owners.md)
+- [useRemoveOwner](https://docs.cometh.io/integrations/react-hooks/handle-owners/useremoveowner.md)
+- [useValidateAddDevice](https://docs.cometh.io/integrations/react-hooks/handle-owners/usevalidateadddevice.md)
+- [useCreateNewSigner](https://docs.cometh.io/integrations/react-hooks/handle-owners/usecreatenewsigner.md)
+- [useAddOwner](https://docs.cometh.io/integrations/react-hooks/handle-owners/useaddowner.md)
+- [useGetOwners/EnrichedOwners](https://docs.cometh.io/integrations/react-hooks/handle-owners/usegetowners-enrichedowners.md)
+- [Session Keys](https://docs.cometh.io/integrations/react-hooks/session-keys.md)
+- [useGrantPermission](https://docs.cometh.io/integrations/react-hooks/session-keys/usegrantpermission.md): This hook provides functionality to asynchronously grant permissions and monitor the status of the transaction.
+- [useSendPermission](https://docs.cometh.io/integrations/react-hooks/session-keys/usesendpermission.md): This hook handles the process of sending permissions and monitors the transaction’s status.
+- [useSessionKeyClient](https://docs.cometh.io/integrations/react-hooks/session-keys/usesessionkeyclient.md): This hook initializes and returns a session key client using the provided API key, session data, and private key.
+- [useSessionKeySigner](https://docs.cometh.io/integrations/react-hooks/session-keys/usesessionkeysigner.md): This hook returns a session key signer based on the provided session data and private key. The signer is used to interact with smart sessions and execute permissioned actions.
+- [Recovery](https://docs.cometh.io/integrations/react-hooks/recovery.md)
+- [useIsRecoveryActive](https://docs.cometh.io/integrations/react-hooks/recovery/useisrecoveryactive.md)
+- [useSetUpRecovery](https://docs.cometh.io/integrations/react-hooks/recovery/usesetuprecovery.md)
+- [useGetRecoveryRequest](https://docs.cometh.io/integrations/react-hooks/recovery/usegetrecoveryrequest.md)
+- [useCancelRecoveryRequest](https://docs.cometh.io/integrations/react-hooks/recovery/usecancelrecoveryrequest.md)
+- [Mobile SDKs](https://docs.cometh.io/integrations/mobile-sdks.md)
+- [IOS](https://docs.cometh.io/integrations/mobile-sdks/ios.md)
+- [Android](https://docs.cometh.io/integrations/mobile-sdks/android.md)
+- [React Native](https://docs.cometh.io/integrations/mobile-sdks/react-native.md)
+- [Wagmi](https://docs.cometh.io/integrations/wagmi.md)
+- [SDK Core](https://docs.cometh.io/sdk-core.md)
+- [Signers (Auth Providers)](https://docs.cometh.io/sdk-core/signers-auth-providers.md)
+- [EOA wallets (Metamask, Phantom...)](https://docs.cometh.io/sdk-core/signers-auth-providers/eoa-wallets-metamask-phantom....md)
+- [Magic signer](https://docs.cometh.io/sdk-core/signers-auth-providers/magic-signer.md)
+- [Web3Auth signer](https://docs.cometh.io/sdk-core/signers-auth-providers/web3auth-signer.md)
+- [Turnkey signer](https://docs.cometh.io/sdk-core/signers-auth-providers/turnkey-signer.md)
+- [Privy signer](https://docs.cometh.io/sdk-core/signers-auth-providers/privy-signer.md)
+- [Handle owners](https://docs.cometh.io/sdk-core/handle-owners.md): You can easily add, remove or get all your wallet owners.
+- [Capabilities](https://docs.cometh.io/sdk-core/capabilities.md)
+- [sendCalls](https://docs.cometh.io/sdk-core/capabilities/sendcalls.md)
+- [getCallsStatus](https://docs.cometh.io/sdk-core/capabilities/getcallsstatus.md)
+- [getCapabilities](https://docs.cometh.io/sdk-core/capabilities/getcapabilities.md)
+- [SDK Session Keys](https://docs.cometh.io/sdk-session-keys.md)
+- [Setup Smart Account Client](https://docs.cometh.io/sdk-session-keys/setup-smart-account-client.md)
+- [Manage session keys](https://docs.cometh.io/sdk-session-keys/manage-session-keys.md): Example of a session key with an action policy.
+- [Policies](https://docs.cometh.io/sdk-session-keys/policies.md)
+- [Sudo policy](https://docs.cometh.io/sdk-session-keys/policies/sudo-policy.md): The sudo policy gives full permission to the signer. The signer will be able to send any UserOps.
+- [Action policy](https://docs.cometh.io/sdk-session-keys/policies/action-policy.md): The action policy limits the target (either contract or EOA) that the UserOp can interact with.
+- [Bundler API](https://docs.cometh.io/bundler/bundler-api.md)
+- [eth\_sendUserOperation](https://docs.cometh.io/bundler/bundler-api/eth_senduseroperation.md)
+- [eth\_estimateUserOperationGas](https://docs.cometh.io/bundler/bundler-api/eth_estimateuseroperationgas.md)
+- [eth\_getUserOperationByHash](https://docs.cometh.io/bundler/bundler-api/eth_getuseroperationbyhash.md)
+- [eth\_getUserOperationReceipt](https://docs.cometh.io/bundler/bundler-api/eth_getuseroperationreceipt.md)
+- [eth\_supportedEntryPoints](https://docs.cometh.io/bundler/bundler-api/eth_supportedentrypoints.md)
+- [Paymaster API](https://docs.cometh.io/paymaster/paymaster-api.md)
+- [Migrate from the connect legacy SDK](https://docs.cometh.io/resources/migrate-from-the-connect-legacy-sdk.md): Migrate an account from the legacy SDK to the 4337 SDK
+- [Connect Legacy SDKs (Unity, JS)](https://docs.cometh.io/resources/connect-legacy-sdks-unity-js.md)
+- [FAQ](https://docs.cometh.io/resources/faq.md)

@@ -1,0 +1,73 @@
+generated: '2026-08-17'
+method: searched
+source: https://docs.cometh.io/quick-start/getting-started
+docs:
+- https://docs.cometh.io/quick-start/getting-started
+- https://docs.cometh.io/quick-start/supported-networks
+note: >-
+  Cometh has no "sandbox mode" in the Stripe sense — there are no test-mode key prefixes, no magic test values and no
+  simulator. The test surface is the public EVM TESTNETS: a project in the dashboard is created against one network, so
+  a testnet project's apikey is by construction a test credential, and the getting-started tutorial is written against
+  Polygon testnet / Arbitrum Sepolia. Everything recorded below is published verbatim in the docs; nothing is invented.
+  Note that the testnet path is not fully self-serve: first-time users are told to "reach out so we can set you up with
+  a Connect account and apiKey".
+mode_separation:
+  style: per-project-per-network
+  key_prefixes: []
+  test_key_prefix: null
+  live_key_prefix: null
+  note: >-
+    One apikey per project, one project per chain. There is no documented prefix or flag distinguishing a testnet key
+    from a mainnet key — the chain id in the endpoint path (bundler.cometh.io/{chainId}) is what selects test vs live.
+  dashboard: https://app.cometh.io
+  signup: https://app.cometh.io/register?product=connect
+test_networks:
+- {name: Arbitrum Sepolia, chain_id: 421614, note: 'Used as the worked example in the bundler and paymaster docs'}
+- {name: Base Sepolia, chain_id: 84532}
+- {name: Polygon Amoy, chain_id: 80002, note: 'Tutorial creates the first project on Polygon testnet'}
+- {name: Optimism Sepolia, chain_id: 11155420}
+- {name: Berachain bArtio, chain_id: 80084}
+- {name: BSC Testnet, chain_id: 97}
+- {name: Linea Sepolia, chain_id: 59141}
+test_fixtures:
+- kind: example-contract
+  name: Counter contract
+  value: '0x4FbF9EE4B2AF774D4617eAb027ac2901a41a7b5F'
+  note: >-
+    The counter smart contract the quick-start and SDK examples call (count() / counterList) to demonstrate a sponsored
+    UserOperation end to end. Published verbatim throughout the docs.
+- kind: example-module
+  name: OwnableExecutor (ERC-7579 module used in the install/uninstall examples)
+  value: '0x4Fd8d57b94966982B62e9588C27B4171B55E8354'
+- kind: entrypoint
+  name: ERC-4337 EntryPoint v0.7
+  value: '0x0000000071727De22E5E9d8BAf0edAc6f37da032'
+  note: Returned by pm_supportedEntryPoints in the paymaster docs.
+runnable_examples:
+- {name: react-hooks-demo, url: 'https://github.com/cometh-hq/connect-sdk-4337/tree/main/examples/react-hooks-demo', note: 'Next.js demo shipped in the SDK repo; runs on bun'}
+- {name: example-wagmi, url: 'https://github.com/cometh-hq/connect-sdk-4337/tree/develop/packages/example-wagmi'}
+- {name: getting-started-js, url: 'https://github.com/cometh-hq/getting-started-js'}
+- {name: connect-react-boilerplate, url: 'https://github.com/cometh-hq/connect-react-boilerplate'}
+- {name: connect-core-getting-started, url: 'https://github.com/cometh-hq/connect-core-getting-started'}
+- {name: connect-api-examples, url: 'https://github.com/cometh-hq/connect-api-examples'}
+- name: dashboard tutorial download
+  note: >-
+    The dashboard's "getting started" button downloads the tutorial repository pre-wired to the project's apiKey; the
+    docs show the flow but the artefact is behind the dashboard login.
+test_clocks:
+  supported: false
+  note: >-
+    No time simulation. The one time-dependent flow — social recovery — has a real 24-hour challenge window that must
+    elapse before /recovery/finalize succeeds, with no documented way to fast-forward it in testing.
+console:
+  url: https://app.cometh.io
+  note: >-
+    Project dashboard: create a project per network, read the project apiKey and apiSecret, register sponsored contract
+    addresses for the paymaster, and download the tutorial. Login-gated; access to a first Connect account is
+    human-gated via the contact link.
+local_development:
+  note: >-
+    Passkeys require a secure context, so local development must run on https or localhost, and a passkey created on
+    localhost is not usable from a deployed domain (passkeys are bound to origin). Documented in the FAQ as a testing
+    constraint.
+  source: https://docs.cometh.io/resources/faq

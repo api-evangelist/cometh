@@ -1,0 +1,131 @@
+generated: '2026-08-17'
+method: searched
+source: https://status.cometh.io/
+docs:
+- https://status.cometh.io/
+- https://docs.cometh.io/resources/migrate-from-the-connect-legacy-sdk
+- https://docs.cometh.io/quick-start/supported-networks
+note: >-
+  Cometh runs a real public status page and a real SDK migration path, but publishes no versioning policy, no deprecation
+  policy, no Sunset/Deprecation header support and no SLA — a full-text search of the documentation returns zero matches
+  for "deprecat" and "sunset". The most consequential lifecycle facts about this provider are not stated in its own
+  docs: the Marketplace and Checkout APIs have been withdrawn (their SDKs are still on npm, their hosts no longer route),
+  and the company was acquired by Kaiko. Both are recorded here with the evidence they were established from.
+status_page: https://status.cometh.io/
+status_page_observed:
+  fetched: '2026-08-17'
+  http_status: 200
+  headline: All services are online
+  components:
+  - {group: APIs, name: Paymaster API, state: Operational, note: 'Availability of the paymaster service itself; 100% uptime shown'}
+  - {group: APIs, name: Connect 4337 API, state: Operational}
+  - {group: Bundlers, state: Operational}
+  - {group: Paymasters, state: Operational}
+  history_window: rolling ~90 days of daily state, with an incident history section
+versioning:
+  scheme: none-in-url
+  current: null
+  sdk_versioning: semver (@cometh/connect-sdk-4337 1.0.26, published 2026-04-28)
+  entrypoint_advertised: true
+  entrypoint: '0x0000000071727De22E5E9d8BAf0edAc6f37da032'
+  docs: null
+  note: >-
+    Live hosts carry no version segment; the retired Marketplace/Checkout APIs used /v1. The closest thing to an API
+    version contract is the EntryPoint address returned by eth_supportedEntryPoints / pm_supportedEntryPoints.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation policy is published. A migration guide exists for the SDK generation change (Connect legacy -> Connect
+    4337) and it instructs licence holders to contact Cometh to be moved onto the 4337 licensing model, but a migration
+    guide is not a policy, so no `Deprecation` pointer is wired into apis.yml.
+  migration_guide: https://docs.cometh.io/resources/migrate-from-the-connect-legacy-sdk
+sla:
+  url: null
+  uptime_target: null
+  note: No SLA or uptime commitment is published; the status page shows historical uptime but promises nothing.
+support:
+  channels:
+  - {kind: sales-form, url: 'https://tally.so/r/3lvpjo', label: Talk to an expert}
+  - {kind: calendly, url: 'https://calendly.com/aurelien-gm/30min', label: Contact us (docs, network activation and account setup)}
+  - {kind: github-issues, url: 'https://github.com/cometh-hq'}
+  note: >-
+    No help centre, support portal or documented support SLA. Onboarding itself is human-gated: "If this is your first
+    time using Cometh Connect, please reach out so we can set you up with a Connect account and apiKey."
+generations:
+- name: Cometh Connect 4337
+  state: current
+  sdk: '@cometh/connect-sdk-4337'
+  latest: 1.0.26
+  latest_published: '2026-04-28'
+  hosts: [bundler.cometh.io, paymaster.cometh.io, api.4337.cometh.io]
+- name: Cometh Connect (legacy)
+  state: superseded
+  sdk: '@cometh/connect-sdk'
+  latest: 1.2.31
+  latest_published: '2024-09-03'
+  note: Superseded by the 4337 line; docs keep a migration guide and a "Connect Legacy SDKs (Unity, JS)" page.
+- name: Cometh Marketplace API
+  state: withdrawn
+  sdk: '@cometh/marketplace-sdk'
+  latest: 2.2.9
+  latest_published: '2024-09-02'
+  evidence:
+  - url: https://api.marketplace.cometh.io/v1/doc
+    status: 404
+    body: '{"message":"no Route matched with those values"}'
+    tls: 'default self-signed Kong certificate (subject/issuer O=Kong, CN=localhost, valid 2026-08-16 to 2046-08-11)'
+  note: >-
+    The published SDK still targets https://api.marketplace.cometh.io/v1, but that hostname now resolves to the shared
+    Kong entrypoint with no route and no valid certificate for the name, so the API cannot be called. Not announced
+    anywhere in the docs.
+- name: Cometh Checkout API
+  state: withdrawn
+  sdk: '@cometh/checkout-sdk'
+  latest: 2.3.5
+  latest_published: '2024-12-17'
+  evidence:
+  - url: https://api.checkout.cometh.io/v1/doc-json
+    status: 404
+    body: '{"message":"no Route matched with those values"}'
+    tls: 'default self-signed Kong certificate (O=Kong, CN=localhost)'
+  note: Same withdrawal pattern as the Marketplace API; also unannounced.
+- name: DeFi-as-a-Service API layer
+  state: announced-undocumented
+  note: >-
+    The homepage sells "One API to integrate DeFi custody, staking, trading and payments" and the docs say "The full
+    documentation for the DeFi-as-a-Service API layer is coming soon." Access is via a sales form; nothing is publicly
+    callable or documented.
+  evidence:
+  - url: https://docs.cometh.io/quick-start/cometh-documentation
+    status: 200
+corporate:
+  acquisition:
+    acquirer: Kaiko
+    announced: '2025-12'
+    url: https://kaiko.com/news/Kaiko-Acquires-Cometh-to-Scale-MiCA-Regulated-Onchain-Data-Infrastructure
+    note: >-
+      Announcement is linked from the Cometh homepage banner ("Cometh Joins Kaiko to Build the Infrastructure for
+      Tokenized Finance"). It states a MiCA/CASP licence (AMF No. A2025-008) granted December 2025 and ISO 27001:2022
+      certification, and does not say what happens to the existing Connect products or APIs.
+network_coverage:
+  live_chains:
+  - {name: Arbitrum One, chain_id: 42161}
+  - {name: Arbitrum Sepolia, chain_id: 421614}
+  - {name: Base, chain_id: 8453}
+  - {name: Base Sepolia, chain_id: 84532}
+  - {name: Polygon PoS, chain_id: 137}
+  - {name: Polygon Amoy, chain_id: 80002}
+  - {name: Gnosis Chain, chain_id: 100}
+  - {name: Optimism, chain_id: 10}
+  - {name: Optimism Sepolia, chain_id: 11155420}
+  - {name: Berachain, chain_id: 80094}
+  - {name: Berachain bArtio, chain_id: 80084}
+  - {name: BNB Smart Chain, chain_id: 56}
+  - {name: BSC Testnet, chain_id: 97}
+  - {name: Linea, chain_id: 59144}
+  - {name: Linea Sepolia, chain_id: 59141}
+  on_request: [Avalanche, Celo, Cronos, Fantom, Mantle, Moonriver, Moonbeam]
+  source: https://docs.cometh.io/quick-start/supported-networks
+deprecated_operations: []

@@ -1,0 +1,38 @@
+generated: '2026-08-17'
+method: searched
+source: https://cometh.io/
+plan_count: 0
+pricing_published: false
+pricing_url: null
+currency: null
+billing_model: license + pass-through gas
+note: >-
+  Cometh publishes NO pricing. cometh.io is a single-page Framer site whose only calls to action are "Talk to an expert"
+  (a Tally form) and "Docs"; /pricing and every variant probed returned HTTP 404, and the sitemap contains exactly two
+  URLs (/ and /404). The docs describe the commercial model without ever naming a number: Connect is sold as a LICENCE
+  whose type caps how many transactions a project may sponsor per month, gas sponsored through the paymaster is invoiced
+  monthly at cost ("there is no overhead on the price you pay") and charged to the payment method on the Connect
+  account, and the legacy-to-4337 migration guide tells existing licence holders to contact Cometh "so that we update
+  you to the new 4337 licensing model". Getting a first account and apiKey is itself gated on a human conversation.
+  Recorded as plan_count: 0 — a sales-gated enterprise model, not an omission.
+plans: []
+commercial_model:
+  unit: licence (per project)
+  quota: 'max sponsored transactions per month, set by licence type (value not published)'
+  overage: null
+  gas_billing: >-
+    Monthly invoice for the total gas fees the paymaster covered, billed at cost with no stated overhead, charged to the
+    payment method on the Cometh Connect account.
+  source: https://docs.cometh.io/paymaster/paymaster-api
+  free_tier: unknown
+  self_serve: false
+sales_gate:
+  contact:
+  - {kind: form, url: 'https://tally.so/r/3lvpjo', label: Talk to an expert}
+  - {kind: calendly, url: 'https://calendly.com/aurelien-gm/30min', label: 'Onboarding / network activation'}
+  signup: https://app.cometh.io/register?product=connect
+evidence:
+- {url: 'https://cometh.io/pricing', status: 404}
+- {url: 'https://cometh.io/sitemap.xml', status: 200, note: 'contains only https://cometh.io/ and https://cometh.io/404'}
+- {url: 'https://docs.cometh.io/paymaster/paymaster-api', status: 200, note: 'licence-capped sponsorship + monthly gas invoice, no figures'}
+- {url: 'https://docs.cometh.io/quick-start/getting-started', status: 200, note: 'first-time users must contact Cometh to be set up with an account and apiKey'}

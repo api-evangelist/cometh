@@ -1,0 +1,42 @@
+generated: '2026-08-17'
+method: searched
+probe: true
+url: https://security.cometh.io/
+platform: Vanta
+note: >-
+  Written by hand after probe-security-programs.py reported no hit: the automated probe requires two or more
+  trust/compliance keywords in the response BODY, and this page is a Vanta single-page application whose body is an
+  empty shell (5,005 bytes) that renders its controls, certifications and document list client-side. The hit is real and
+  verified from the shell itself — HTTP 200, `<title>Cometh Trust Center</title>`, `<link rel="canonical"
+  href="https://security.cometh.io">`, Vanta trust-report bundles from assets.vanta.com, and the Vanta slug id
+  4tfjc8kdrwm4rwo3e0wupe. The certification LIST could not be read anonymously (attempts against
+  app.vanta.com/api/trust/<slug> and security.cometh.io/api/* return the same HTML shell; api.vanta.com/v1 returns 401),
+  so the certifications below are attributed to the source that actually states them — Kaiko's acquisition announcement
+  — and not to the trust centre.
+certifications:
+- name: ISO/IEC 27001:2022
+  source: https://kaiko.com/news/Kaiko-Acquires-Cometh-to-Scale-MiCA-Regulated-Onchain-Data-Infrastructure
+  read_from: acquirer announcement (not readable from the trust centre shell)
+- name: MiCA / CASP licence, AMF No. A2025-008 (granted December 2025)
+  source: https://kaiko.com/news/Kaiko-Acquires-Cometh-to-Scale-MiCA-Regulated-Onchain-Data-Infrastructure
+- name: Registered DASP (Digital Asset Service Provider)
+  source: https://cometh.io/
+evidence:
+- source: https://security.cometh.io/
+  http_status: 200
+  content_type: text/html
+  title: Cometh Trust Center
+  body_bytes: 5005
+  keywords: [trust center, vanta]
+  rendering: client-side (JS)
+  vanta_slug_id: 4tfjc8kdrwm4rwo3e0wupe
+- source: https://cometh.io/
+  http_status: 200
+  keywords: [MiCA, DASP, AMF]
+- source: https://kaiko.com/news/Kaiko-Acquires-Cometh-to-Scale-MiCA-Regulated-Onchain-Data-Infrastructure
+  http_status: 200
+  keywords: [MiCA, CASP, 'AMF No. A2025-008', 'ISO 27001:2022']
+gaps:
+- 'No /.well-known/security.txt on any host (404 on cometh.io/docs/bundler, 401 on paymaster/api.4337).'
+- 'No responsible-disclosure or bug-bounty page found: cometh.io/security, /responsible-disclosure and /vulnerability-disclosure all 404, so no VulnerabilityDisclosure artifact and no Security pointer were written.'
+- 'The trust centre exposes no anonymous machine-readable summary, so certifications cannot be verified from the provider''s own surface without a request through Vanta.'

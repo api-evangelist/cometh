@@ -1,0 +1,97 @@
+generated: '2026-08-17'
+method: searched
+source: https://docs.cometh.io/llms.txt
+docs:
+- https://docs.cometh.io/bundler/bundler-api
+- https://docs.cometh.io/paymaster/paymaster-api
+- https://docs.cometh.io/advanced/capabilities
+note: >-
+  Read from the documented request/response examples, not from a spec (Cometh publishes no OpenAPI). The dominant
+  convention is JSON-RPC 2.0, not REST: the bundler and paymaster are ERC-4337 RPC endpoints and the chain is selected
+  by a path segment (the chain id) rather than a header or body field. A small REST surface exists alongside it on the
+  paymaster (sponsored-address, sponsored-chain) and on the Connect API (wallet, webauthn-signer, recovery,
+  relayed-transactions). Several cross-cutting concerns the pipeline looks for are simply ABSENT from the published
+  docs, and that absence is recorded rather than filled in: a full-text search of docs.cometh.io/llms-full.txt (169KB)
+  returns ZERO occurrences of "rate limit", "429", "idempot", "webhook", "pagination", "deprecat" or "sunset".
+authentication:
+  style: api-key
+  front_end: apikey query parameter
+  back_end: apisecret header
+  detail: authentication/cometh-authentication.yml
+protocol:
+  primary: JSON-RPC 2.0
+  secondary: REST/JSON
+  content_type: application/json
+  chain_selection: path segment (chain id), e.g. /421614 for Arbitrum Sepolia
+  jsonrpc_methods:
+  - eth_sendUserOperation
+  - eth_estimateUserOperationGas
+  - eth_getUserOperationByHash
+  - eth_getUserOperationReceipt
+  - eth_supportedEntryPoints
+  - pm_sponsorUserOperation
+  - pm_supportedEntryPoints
+  rest_routes:
+  - {method: GET, path: '/sponsored-address/{chainId}/', host: paymaster.cometh.io}
+  - {method: POST, path: '/sponsored-address/', host: paymaster.cometh.io}
+  - {method: GET, path: '/sponsored-chain/{chainId}/', host: paymaster.cometh.io}
+  - {method: POST, path: '/sponsored-chain/', host: paymaster.cometh.io}
+  - {method: POST, path: '/recovery/start', host: api.4337.cometh.io}
+  - {method: POST, path: '/recovery/start-with-shared', host: api.4337.cometh.io}
+  - {method: POST, path: '/recovery/finalize', host: api.4337.cometh.io}
+idempotency:
+  http_idempotency_key: false
+  header: null
+  note: >-
+    NO HTTP idempotency contract is published — no Idempotency-Key header, no request-id de-duplication, and no
+    idempotency section anywhere in the docs (zero matches for "idempot"). Replay protection exists one layer down, in
+    the protocol rather than the API: every ERC-4337 User Operation carries a `nonce` that the EntryPoint contract
+    consumes exactly once, so a resubmitted UserOp with the same nonce is rejected on-chain rather than de-duplicated by
+    Cometh. That is a real safety property but it is NOT an API idempotency key, so no `Idempotency` pointer is wired
+    into apis.yml.
+  protocol_level_replay_protection: ERC-4337 UserOperation nonce (consumed by the EntryPoint)
+pagination:
+  supported: false
+  note: No pagination scheme documented; the read routes (sponsored addresses/chains) return unpaged arrays.
+versioning:
+  scheme: none-in-url
+  note: >-
+    The current hosts carry no version segment (bundler.cometh.io/{chainId}, api.4337.cometh.io). Versioning is
+    expressed through the SDK (semver on @cometh/connect-sdk-4337) and through the ERC-4337 EntryPoint address returned
+    by eth_supportedEntryPoints / pm_supportedEntryPoints. The retired Marketplace and Checkout APIs did use a /v1
+    prefix.
+  entrypoint_advertised: true
+error_envelope:
+  format: jsonrpc-error
+  shape: '{"jsonrpc":"2.0","id":<id>,"error":{...}}'
+  gateway_errors:
+  - {status: 401, body: '{"message":"No API key found in request"}', origin: Kong key-auth}
+  - {status: 404, body: '{"message":"no Route matched with those values"}', origin: Kong router}
+  note: >-
+    No error reference / error-code catalogue is published, so no errors/ artifact was written. The only error bodies
+    that can be observed anonymously are the Kong gateway messages above; validation failures surface as ERC-4337
+    EntryPoint revert codes (AAxx) inside the JSON-RPC error, which the docs mention only inside examples.
+rate_limit_signaling:
+  documented: false
+  headers: []
+  detail: rate-limits/cometh-rate-limits.yml
+request_tracing:
+  request_id_header: null
+  documented: false
+  note: The JSON-RPC `id` field is the only correlation handle documented.
+metadata_and_expansion:
+  metadata_field: false
+  field_expansion: false
+eip_5792_capabilities:
+  supported: true
+  note: >-
+    The SDK exposes the EIP-5792 wallet-capability calls — sendCalls, getCallsStatus, getCapabilities — plus
+    grantPermissions (ERC-7715 style session-key granting). These are wallet-client conventions rather than HTTP API
+    conventions, but they are the documented way an application batches and tracks calls.
+  docs: https://docs.cometh.io/advanced/capabilities
+cross_links:
+  authentication: authentication/cometh-authentication.yml
+  lifecycle: lifecycle/cometh-lifecycle.yml
+  rate_limits: rate-limits/cometh-rate-limits.yml
+  sandbox: sandbox/cometh-sandbox.yml
+  conformance: conformance/cometh-conformance.yml

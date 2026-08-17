@@ -1,0 +1,36 @@
+generated: '2026-08-17'
+method: searched
+source: https://docs.cometh.io/llms.txt
+limit_count: 0
+documented: false
+headers: []
+retry_after: false
+exhaustion_status: null
+note: >-
+  No rate limits are published anywhere. A full-text search of the complete documentation dump
+  (https://docs.cometh.io/llms-full.txt, 169KB, fetched 2026-08-17) returns ZERO occurrences of "rate limit", "429",
+  "throttl", "quota per second" or "Retry-After", and no response-header contract of any kind is documented. The only
+  published volume control is commercial rather than technical: the Connect licence caps how many transactions a project
+  may sponsor through the paymaster each month (figure not published — see plans/cometh-plans-pricing.yml). All three API
+  hosts sit behind a Kong gateway, so a rate-limiting plugin may well be enforced, but nothing is advertised to a client
+  and no anonymous request can observe it — an unauthenticated call is rejected at the gateway with 401
+  {"message":"No API key found in request"} before any limit headers could be returned. Recorded as an honest zero.
+limits: []
+observed:
+- url: https://api.4337.cometh.io/
+  status: 401
+  body: '{"message":"No API key found in request"}'
+  headers_seen: []
+  note: Kong key-auth rejects before routing; no RateLimit-* or X-RateLimit-* headers present on the rejection.
+- url: https://bundler.cometh.io/openapi.json
+  status: 404
+  body: '{"message":"no Route matched with those values"}'
+  headers_seen: []
+gateway: Kong
+commercial_cap:
+  kind: monthly sponsored-transaction cap by licence type
+  value: null
+  source: https://docs.cometh.io/paymaster/paymaster-api
+evidence:
+- {url: 'https://docs.cometh.io/llms-full.txt', status: 200, note: 'zero matches for rate limit / 429 / throttle / Retry-After'}
+- {url: 'https://api.4337.cometh.io/', status: 401}

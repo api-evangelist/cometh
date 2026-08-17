@@ -1,0 +1,87 @@
+generated: '2026-08-17'
+method: searched
+source: https://docs.cometh.io/quick-start/getting-started
+docs:
+- https://docs.cometh.io/quick-start/getting-started
+- https://docs.cometh.io/bundler/bundler-api
+- https://docs.cometh.io/paymaster/paymaster-api
+- https://docs.cometh.io/advanced/social-recovery
+note: >-
+  Derived by hand from the documented request examples rather than from an OpenAPI: Cometh publishes no machine-readable
+  contract (see x-coverage in apis.yml), so derive-authentication.py had no spec to read. Two credentials are
+  documented, both project-scoped and both issued from the app.cometh.io dashboard: `apikey`, passed in the QUERY
+  STRING and explicitly described as safe for front-end use ("It will be used in your front-end to authenticate public
+  API calls"), and `apisecret`, passed as an HTTP HEADER and documented as back-end only ("Recovery endpoints are
+  protected with an apisecret, indicating that requests should be done from your backend for privacy concerns"). There
+  is no OAuth 2.0, no OIDC, no bearer-token flow and no mTLS anywhere in the documentation — a full-text search of
+  docs.cometh.io/llms-full.txt returns zero occurrences of "Bearer", "x-api-key" or any OAuth endpoint.
+summary:
+  types: [apiKey]
+  api_key_in: [query, header]
+  api_key_names: [apikey, apisecret]
+  oauth2_flows: []
+  oidc: false
+  mtls: false
+  gateway: Kong
+  key_issuance: dashboard
+  key_issuance_url: https://app.cometh.io
+  key_scope: per-project-per-chain
+  self_serve: partial
+schemes:
+- name: apikey
+  type: apiKey
+  in: query
+  parameter: apikey
+  audience: front-end (public)
+  applies_to:
+  - https://bundler.cometh.io/{chainId}
+  - https://paymaster.cometh.io/{chainId}
+  - https://paymaster.cometh.io/sponsored-address/{chainId}/
+  - https://paymaster.cometh.io/sponsored-chain/{chainId}/
+  example_form: https://bundler.cometh.io/CHAIN_ID?apikey=API_KEY
+  source: https://docs.cometh.io/bundler/bundler-api
+- name: apisecret
+  type: apiKey
+  in: header
+  parameter: apisecret
+  audience: back-end (server-to-server)
+  applies_to:
+  - https://api.4337.cometh.io/recovery/start
+  - https://api.4337.cometh.io/recovery/start-with-shared
+  - https://api.4337.cometh.io/recovery/finalize
+  - https://paymaster.cometh.io/sponsored-address/ (POST)
+  - https://paymaster.cometh.io/sponsored-chain/ (POST)
+  note: >-
+    Documented both as a request header (api.defaults.headers.common["apisecret"]) and, in one paymaster example, as a
+    query parameter (?apisecret=API_SECRET) — the docs are inconsistent about placement for the write routes.
+  source: https://docs.cometh.io/advanced/social-recovery
+enforcement_observed:
+- url: https://api.4337.cometh.io/
+  status: 401
+  body: '{"message":"No API key found in request"}'
+  note: Kong key-auth plugin rejects unauthenticated requests before routing; observed 2026-08-17.
+- url: https://paymaster.cometh.io/
+  status: 401
+  body: '{"message":"No API key found in request"}'
+  note: Observed 2026-08-17.
+- url: https://bundler.cometh.io/openapi.json
+  status: 404
+  body: '{"message":"no Route matched with those values"}'
+  note: >-
+    The bundler host routes only the per-chain JSON-RPC paths; unmatched paths 404 at the gateway rather than 401,
+    which is how the absence of a discovery document was confirmed.
+end_user_authentication:
+  note: >-
+    Distinct from API authentication. End users do not hold a Cometh credential: the wallet owner is a WebAuthn/passkey
+    signer (or an external EOA / Magic / Web3Auth / Turnkey / Privy signer), and delegated authority is expressed
+    on-chain as ERC-7579 smart sessions (session keys) with sudo or action policies.
+  signers:
+  - passkey (WebAuthn, platform authenticator)
+  - EOA wallet (MetaMask, Phantom, ...)
+  - Magic
+  - Web3Auth
+  - Turnkey
+  - Privy
+  delegated_access: ERC-7579 smart sessions (session keys) with sudo / action policies
+  recovery: social recovery via Safe delay module, 24h challenge window, apisecret-protected API
+  docs: https://docs.cometh.io/advanced/session-keys

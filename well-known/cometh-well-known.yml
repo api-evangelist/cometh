@@ -1,0 +1,76 @@
+generated: '2026-08-17'
+method: probed
+source: live GET probes on 2026-08-17
+note: >-
+  Every /.well-known/ path was probed on all five Cometh hosts and NOT ONE returned a document. cometh.io (Framer)
+  answers a 10-byte "Not found" for every path; docs.cometh.io (GitBook/Vercel) answers HTTP 404 with a ~180KB HTML
+  application shell — an SPA catch-all, not a document; and the three API hosts sit behind a Kong gateway that answers
+  either 404 {"message":"no Route matched with those values"} (bundler) or 401 {"message":"No API key found in
+  request"} (paymaster, api.4337) before any /.well-known/ path can be served, so even an anonymous discovery document
+  is unreachable there. Per the pipeline contract NO WellKnown or SecurityTxt pointer is wired into apis.yml — this
+  file records a verified absence, not a surface.
+hosts:
+- host: https://cometh.io
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /security.txt, status: 404}
+- host: https://docs.cometh.io
+  note: All 404s return the ~180KB GitBook HTML application shell (text/html), not a document.
+  documents:
+  - {path: /.well-known/security.txt, status: 404, body: html-shell}
+  - {path: /.well-known/openid-configuration, status: 404, body: html-shell}
+  - {path: /.well-known/oauth-authorization-server, status: 404, body: html-shell}
+  - {path: /.well-known/oauth-protected-resource, status: 404, body: html-shell}
+  - {path: /.well-known/api-catalog, status: 404, body: html-shell}
+  - {path: /.well-known/ai-plugin.json, status: 404, body: html-shell}
+  - {path: /.well-known/agent-card.json, status: 404, body: html-shell}
+  - {path: /.well-known/agent.json, status: 404, body: html-shell}
+- host: https://bundler.cometh.io
+  note: 'Kong gateway: 404 {"message":"no Route matched with those values"} on every /.well-known/ path.'
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://paymaster.cometh.io
+  note: 'Kong key-auth: 401 {"message":"No API key found in request"} on every path, including /.well-known/.'
+  documents:
+  - {path: /.well-known/security.txt, status: 401}
+  - {path: /.well-known/openid-configuration, status: 401}
+  - {path: /.well-known/oauth-authorization-server, status: 401}
+  - {path: /.well-known/oauth-protected-resource, status: 401}
+  - {path: /.well-known/api-catalog, status: 401}
+  - {path: /.well-known/ai-plugin.json, status: 401}
+  - {path: /.well-known/agent-card.json, status: 401}
+  - {path: /.well-known/agent.json, status: 401}
+- host: https://api.4337.cometh.io
+  note: 'Kong key-auth: 401 {"message":"No API key found in request"} on every path, including /.well-known/.'
+  documents:
+  - {path: /.well-known/security.txt, status: 401}
+  - {path: /.well-known/openid-configuration, status: 401}
+  - {path: /.well-known/oauth-authorization-server, status: 401}
+  - {path: /.well-known/oauth-protected-resource, status: 401}
+  - {path: /.well-known/api-catalog, status: 401}
+  - {path: /.well-known/ai-plugin.json, status: 401}
+  - {path: /.well-known/agent-card.json, status: 401}
+  - {path: /.well-known/agent.json, status: 401}
+summary:
+  hosts_probed: 5
+  paths_probed: 41
+  documents_found: 0
+  security_txt: false
+  agent_card: false
+  oauth_metadata: false
+  api_catalog: false
+  pointer_emitted: false

@@ -1,0 +1,201 @@
+generated: '2026-08-17'
+method: searched
+source: >-
+  https://registry.npmjs.org (per-package metadata endpoints), https://jitpack.io/api/builds/com.github.cometh-hq,
+  https://api.github.com/repos/cometh-hq/*, https://docs.cometh.io/integrations/mobile-sdks
+note: >-
+  Cometh publishes its client libraries under the npm @cometh scope for web/TypeScript, and distributes the mobile SDKs
+  from git tags (Swift Package Manager for iOS, JitPack for Android) rather than from CocoaPods or Maven Central —
+  probes of trunk.cocoapods.org (swift4337, Cometh) and search.maven.org (g:io.cometh) both returned zero results, and
+  pypi.org/pypi/cometh/json returned 404. The current, maintained line is @cometh/connect-sdk-4337 (published
+  2026-04-28); the 1.x @cometh/connect-sdk "legacy" line has not been republished since 2024-09-03 and the docs carry a
+  migration guide off it. @cometh/marketplace-sdk and @cometh/checkout-sdk wrap the Marketplace and Checkout APIs,
+  whose hosts (api.marketplace.cometh.io, api.checkout.cometh.io) now answer only a Kong "no Route matched with those
+  values" 404 behind a default self-signed certificate — those SDKs are recorded as stale, not current.
+packages:
+- language: typescript
+  registry: npm
+  name: '@cometh/connect-sdk-4337'
+  url: https://www.npmjs.com/package/@cometh/connect-sdk-4337
+  install: npm install @cometh/connect-sdk-4337
+  official: true
+  version: 1.0.26
+  published: '2026-04-28'
+  repository: https://github.com/cometh-hq/connect-sdk-4337
+  note: Current ERC-4337 Connect SDK (viem-based smart account client, passkey signers, session keys, recovery).
+- language: typescript
+  registry: npm
+  name: '@cometh/connect-core-sdk'
+  url: https://www.npmjs.com/package/@cometh/connect-core-sdk
+  install: npm install @cometh/connect-core-sdk
+  official: true
+  version: 0.0.2
+  published: '2025-04-22'
+  repository: https://github.com/cometh-hq/connect-sdk-4337
+  note: Core SDK; docs state it does not require a Cometh API key.
+- language: typescript
+  registry: npm
+  name: '@cometh/session-keys'
+  url: https://www.npmjs.com/package/@cometh/session-keys
+  install: npm install @cometh/session-keys
+  official: true
+  version: 0.0.1
+  published: '2025-04-22'
+  repository: https://github.com/cometh-hq/connect-sdk-4337
+  note: ERC-7579 smart-session / session-key package.
+- language: typescript
+  registry: npm
+  name: '@cometh/connect-react-hooks'
+  url: https://www.npmjs.com/package/@cometh/connect-react-hooks
+  install: npm install @cometh/connect-react-hooks
+  official: true
+  version: 1.0.1
+  published: '2025-01-31'
+  repository: https://github.com/cometh-hq/connect-sdk-4337
+  note: React provider (ConnectProvider) plus the documented hooks (useAccount, useSendTransaction, ...).
+- language: typescript
+  registry: npm
+  name: '@cometh/rtn-4337'
+  url: https://www.npmjs.com/package/@cometh/rtn-4337
+  install: npm install @cometh/rtn-4337
+  official: true
+  version: 0.1.7
+  published: '2025-02-13'
+  repository: https://github.com/cometh-hq/rtn-4337
+  note: >-
+    React Native SDK wrapping the native android4337 / swift4337 libraries. The npm release (0.1.7) trails the repo tag
+    0.2.2 (2024-12-09).
+- language: swift
+  registry: swift-package-manager
+  name: swift4337
+  url: https://github.com/cometh-hq/swift4337
+  install: 'Swift Package Manager: .package(url: "https://github.com/cometh-hq/swift4337", from: "0.5.1")'
+  official: true
+  version: 0.5.1
+  published: '2025-02-13'
+  repository: https://github.com/cometh-hq/swift4337
+  note: >-
+    iOS/Swift ERC-4337 SDK. Distributed from git tags — no CocoaPods trunk entry (trunk.cocoapods.org/api/v1/pods/swift4337
+    returned 404) and no Maven/registry metadata endpoint, so the version and date are read from the git tag and its
+    commit date.
+- language: kotlin
+  registry: jitpack
+  name: com.github.cometh-hq:android4337
+  url: https://jitpack.io/#cometh-hq/android4337
+  install: 'implementation("com.github.cometh-hq:android4337:0.2.8")'
+  official: true
+  version: 0.2.8
+  published: '2025-02-13'
+  repository: https://github.com/cometh-hq/android4337
+  note: >-
+    Android/Kotlin ERC-4337 SDK, built on demand by JitPack (jitpack.io/api/builds/com.github.cometh-hq/android4337
+    lists 0.2.8 as the newest "ok" build). Absent from Maven Central (search.maven.org g:io.cometh -> 0 results); the
+    date is the 0.2.8 git tag commit date.
+- language: csharp
+  registry: github-releases
+  name: connect-sdk-unity
+  url: https://github.com/cometh-hq/connect-sdk-unity
+  install: Import the Unity package from the GitHub release.
+  official: true
+  version: v0.3.2
+  published: '2024-11-28'
+  repository: https://github.com/cometh-hq/connect-sdk-unity
+  note: >-
+    Unity SDK for the legacy Connect line; distributed as a GitHub release, not a package registry (npm
+    @cometh/connect-sdk-unity returns 404). Docs file it under "Connect Legacy SDKs (Unity, JS)".
+- language: typescript
+  registry: npm
+  name: '@cometh/connect-sdk'
+  url: https://www.npmjs.com/package/@cometh/connect-sdk
+  install: npm install @cometh/connect-sdk
+  official: true
+  version: 1.2.31
+  published: '2024-09-03'
+  repository: https://github.com/cometh-hq/connect-sdk
+  status: legacy
+  note: >-
+    Legacy (pre-4337) Connect SDK. Superseded by @cometh/connect-sdk-4337; docs publish a migration guide at
+    https://docs.cometh.io/resources/migrate-from-the-connect-legacy-sdk.
+- language: typescript
+  registry: npm
+  name: '@cometh/connect-sdk-viem'
+  url: https://www.npmjs.com/package/@cometh/connect-sdk-viem
+  install: npm install @cometh/connect-sdk-viem
+  official: true
+  version: 2.0.8
+  published: '2024-10-17'
+  repository: https://github.com/cometh-hq/connect-sdk-viem
+  status: legacy
+  note: viem adapter for the legacy Connect SDK; no release since 2024-10.
+- language: typescript
+  registry: npm
+  name: '@cometh/hosted-sdk'
+  url: https://www.npmjs.com/package/@cometh/hosted-sdk
+  install: npm install @cometh/hosted-sdk
+  official: true
+  version: 0.3.2
+  published: '2024-11-20'
+  repository: https://github.com/cometh-hq/hosted-sdk
+  status: legacy
+  note: Hosted Connect SDK (hosted wallet surface); no release since 2024-11 and not referenced from current docs.
+- language: typescript
+  registry: npm
+  name: '@cometh/marketplace-sdk'
+  url: https://www.npmjs.com/package/@cometh/marketplace-sdk
+  install: npm install @cometh/marketplace-sdk
+  official: true
+  version: 2.2.9
+  published: '2024-09-02'
+  status: stale
+  note: >-
+    "SDK to use Cometh Marketplace API" — targets https://api.marketplace.cometh.io/v1, a host that now answers only
+    Kong's {"message":"no Route matched with those values"} (HTTP 404) behind a default self-signed
+    O=Kong/CN=localhost certificate. Recorded as stale: the SDK is published but its API is no longer routed.
+- language: typescript
+  registry: npm
+  name: '@cometh/checkout-sdk'
+  url: https://www.npmjs.com/package/@cometh/checkout-sdk
+  install: npm install @cometh/checkout-sdk
+  official: true
+  version: 2.3.5
+  published: '2024-12-17'
+  status: stale
+  note: >-
+    "SDK to use Cometh Checkout API" — targets https://api.checkout.cometh.io/v1, which likewise returns Kong
+    "no Route matched with those values" behind a self-signed default certificate.
+- language: typescript
+  registry: npm
+  name: '@cometh/checkout-react'
+  url: https://www.npmjs.com/package/@cometh/checkout-react
+  install: npm install @cometh/checkout-react
+  official: true
+  version: 1.1.0
+  published: '2024-09-19'
+  repository: https://github.com/cometh-hq/checkout-sdk
+  status: stale
+  note: React components for Cometh Checkout; same decommissioned Checkout API as @cometh/checkout-sdk.
+- language: typescript
+  registry: npm
+  name: '@cometh/keystore-sdk'
+  url: https://www.npmjs.com/package/@cometh/keystore-sdk
+  install: npm install @cometh/keystore-sdk
+  official: true
+  version: 0.0.1
+  published: '2025-06-04'
+  repository: https://github.com/cometh-hq/keystore-sdk
+  note: Keystore SDK (single 0.0.1 release); paired with the cometh-hq/keystore-contracts repo.
+summary:
+  official_count: 15
+  current_count: 5
+  legacy_or_stale_count: 10
+  registries:
+  - npm
+  - jitpack
+  - swift-package-manager
+  - github-releases
+  absent_registries:
+  - pypi
+  - maven-central
+  - cocoapods
+  newest_release: '2026-04-28'
+  newest_package: '@cometh/connect-sdk-4337'

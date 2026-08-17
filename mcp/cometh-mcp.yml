@@ -1,0 +1,120 @@
+generated: '2026-08-17'
+method: derived
+status: candidate
+source: https://docs.cometh.io/llms.txt
+note: >-
+  NO MCP SERVER EXISTS. Cometh publishes no hosted/remote MCP endpoint and no stdio package: there is no @cometh MCP
+  package on npm, no MCP mention anywhere in the documentation, and nothing in the cometh-hq GitHub organisation. The
+  tools below are a DERIVED CANDIDATE surface — the JSON-RPC methods and REST routes Cometh actually documents, written
+  in tool form so the agent surface a server would expose is legible. They are not offered by Cometh and no `MCPServer`
+  pointer is wired into apis.yml; wiring one would assert an agent surface the provider does not serve. Input schemas
+  could not be inherited from a spec because Cometh publishes no OpenAPI, so each tool records its documented parameters
+  as prose from the docs.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+server:
+  name: cometh
+  transport: null
+  url: null
+tools:
+- name: send_user_operation
+  description: Submit an ERC-4337 User Operation to the bundler mempool; returns a userOpHash or an error.
+  source_operation: 'jsonrpc: eth_sendUserOperation'
+  source_doc: https://docs.cometh.io/bundler/bundler-api/eth_senduseroperation
+  params: [userOperation, entryPointAddress]
+- name: estimate_user_operation_gas
+  description: >-
+    Estimate preVerificationGas, verificationGasLimit and callGasLimit for a User Operation, optionally against state
+    overrides.
+  source_operation: 'jsonrpc: eth_estimateUserOperationGas'
+  source_doc: https://docs.cometh.io/bundler/bundler-api/eth_estimateuseroperationgas
+  params: [userOperation, entryPointAddress, stateOverride]
+- name: get_user_operation_by_hash
+  description: Retrieve a User Operation and its transaction context by userOpHash.
+  source_operation: 'jsonrpc: eth_getUserOperationByHash'
+  source_doc: https://docs.cometh.io/bundler/bundler-api/eth_getuseroperationbyhash
+  params: [userOpHash]
+- name: get_user_operation_receipt
+  description: Fetch the receipt (status, logs, metadata) of a User Operation by userOpHash.
+  source_operation: 'jsonrpc: eth_getUserOperationReceipt'
+  source_doc: https://docs.cometh.io/bundler/bundler-api/eth_getuseroperationreceipt
+  params: [userOpHash]
+- name: supported_entry_points
+  description: List the EntryPoint addresses the bundler supports; the first is preferred.
+  source_operation: 'jsonrpc: eth_supportedEntryPoints'
+  source_doc: https://docs.cometh.io/bundler/bundler-api/eth_supportedentrypoints
+  params: []
+- name: sponsor_user_operation
+  description: >-
+    Ask the paymaster to sponsor a User Operation; on approval returns paymasterAndData plus updated gas values.
+  source_operation: 'jsonrpc: pm_sponsorUserOperation'
+  source_doc: https://docs.cometh.io/paymaster/paymaster-api
+  params: [userOperation, entryPointAddress]
+- name: paymaster_supported_entry_points
+  description: List the EntryPoint addresses the paymaster supports.
+  source_operation: 'jsonrpc: pm_supportedEntryPoints'
+  source_doc: https://docs.cometh.io/paymaster/paymaster-api
+  params: []
+- name: list_sponsored_addresses
+  description: Read the contract addresses a project sponsors on a given chain.
+  source_operation: 'GET https://paymaster.cometh.io/sponsored-address/{chainId}/'
+  source_doc: https://docs.cometh.io/paymaster/paymaster-api
+  params: [chainId]
+- name: add_sponsored_address
+  description: Register a target contract address for gas sponsorship (apisecret, back end only).
+  source_operation: 'POST https://paymaster.cometh.io/sponsored-address/'
+  source_doc: https://docs.cometh.io/paymaster/paymaster-api
+  params: [targetAddress, chainId]
+  consequence: write
+- name: list_sponsored_chains
+  description: Read the chains a project sponsors.
+  source_operation: 'GET https://paymaster.cometh.io/sponsored-chain/{chainId}/'
+  source_doc: https://docs.cometh.io/paymaster/paymaster-api
+  params: [chainId]
+- name: add_sponsored_chain
+  description: Sponsor an entire chain for a project (apisecret, back end only).
+  source_operation: 'POST https://paymaster.cometh.io/sponsored-chain/'
+  source_doc: https://docs.cometh.io/paymaster/paymaster-api
+  params: [chainId]
+  consequence: write
+- name: start_recovery
+  description: >-
+    Start a social-recovery request that replaces all existing owners of a Safe with a new owner (apisecret, back end
+    only). Opens a 24-hour challenge window.
+  source_operation: 'POST https://api.4337.cometh.io/recovery/start'
+  source_doc: https://docs.cometh.io/advanced/social-recovery
+  params: [chainId, walletAddress, newOwner, publicKeyId, publicKeyX, publicKeyY, deviceData]
+  consequence: safety-critical
+- name: start_recovery_shared_signer
+  description: >-
+    Start recovery for a Safe using the SafeWebAuthnSharedSigner by replacing the associated passkey (apisecret, back end
+    only).
+  source_operation: 'POST https://api.4337.cometh.io/recovery/start-with-shared'
+  source_doc: https://docs.cometh.io/advanced/social-recovery
+  params: [chainId, walletAddress, publicKeyId, publicKeyX, publicKeyY, deviceData]
+  consequence: safety-critical
+- name: finalize_recovery
+  description: >-
+    Finalize a recovery request once the 24-hour period has elapsed without cancellation; requires no signature and may
+    be called by any party.
+  source_operation: 'POST https://api.4337.cometh.io/recovery/finalize'
+  source_doc: https://docs.cometh.io/advanced/social-recovery
+  params: [chainId, walletAddress]
+  consequence: safety-critical
+coverage:
+  tools_derived: 14
+  from_jsonrpc: 7
+  from_rest: 7
+  input_schemas_inherited: 0
+  input_schema_note: >-
+    No OpenAPI exists to inherit parameters from; params[] are the field names shown in the documented request examples.
+searched:
+  npm_scope: '@cometh — no MCP package'
+  docs_mentions_mcp: 0
+  github_org: 'cometh-hq — no MCP repository'
+  checked: '2026-08-17'
