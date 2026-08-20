@@ -23,6 +23,25 @@ modified: '2026-08-17'
 tags:
 - Company
 - Blockchain
+- Account Abstraction
+- ERC-4337
+- Smart Wallet
+- Paymaster
+- Bundler
+- Passkeys
+- WebAuthn
+- Gasless Transactions
+- DeFi
+- Custody
+- Staking
+- Payments
+- JSON-RPC
+- MiCA
+- SAFe
+- Web3
+tags_raw:
+- Company
+- Blockchain
 - account-abstraction
 - erc-4337
 - smart-wallet
@@ -48,6 +67,12 @@ apis:
   humanURL: https://docs.cometh.io/bundler/bundler-api
   baseURL: https://bundler.cometh.io/{chainId}
   tags:
+  - ERC-4337
+  - Bundler
+  - Account Abstraction
+  - JSON-RPC
+  - Blockchain
+  tags_raw:
   - erc-4337
   - bundler
   - account-abstraction
@@ -70,6 +95,12 @@ apis:
   humanURL: https://docs.cometh.io/paymaster/paymaster-api
   baseURL: https://paymaster.cometh.io/{chainId}
   tags:
+  - ERC-4337
+  - Paymaster
+  - Gasless Transactions
+  - JSON-RPC
+  - Blockchain
+  tags_raw:
   - erc-4337
   - paymaster
   - gasless-transactions
@@ -91,6 +122,12 @@ apis:
   humanURL: https://docs.cometh.io/advanced/social-recovery
   baseURL: https://api.4337.cometh.io
   tags:
+  - Smart Wallet
+  - Account Abstraction
+  - Passkeys
+  - WebAuthn
+  - social-recovery
+  tags_raw:
   - smart-wallet
   - account-abstraction
   - passkeys
