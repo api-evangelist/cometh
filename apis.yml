@@ -11,6 +11,17 @@ description: >-
   string, front end) or apisecret (header, back end) issued from the app.cometh.io dashboard. The broader
   "DeFi-as-a-Service" API layer is sales-gated and its documentation is marked coming soon. Cometh was acquired by
   crypto market-data provider Kaiko, announced December 2025.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://framerusercontent.com/images/Q1Csh4cl9JXyPBmGbxE2xtSPpFE.png
 url: https://raw.githubusercontent.com/api-evangelist/cometh/refs/heads/main/apis.yml
 x-type: company
