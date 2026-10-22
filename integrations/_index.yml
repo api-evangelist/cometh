@@ -40,3 +40,97 @@
     detected: '2026-10-14'
   status: not-a-workflow
   arazzo: null
+- slug: cometh-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/@cometh/checkout-react
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@cometh/checkout-react'
+      version: 1.1.0
+      released: '2026-04-17'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@cometh/checkout-react
+      repo_leg: github-org:cometh-hq
+      publisher_leg: email:cometh.io
+      matched_by: domain
+    - name: '@cometh/connect-core-sdk'
+      version: 0.0.2
+      released: '2026-04-17'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@cometh/connect-core-sdk
+      repo_leg: github-org:cometh-hq
+      publisher_leg: email:cometh.io
+      matched_by: domain
+    - name: '@cometh/connect-react-hooks'
+      version: 1.0.1
+      released: '2026-04-17'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@cometh/connect-react-hooks
+      repo_leg: github-org:cometh-hq
+      publisher_leg: email:cometh.io
+      matched_by: domain
+    - name: '@cometh/connect-sdk-4337'
+      version: 1.0.26
+      released: '2026-09-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@cometh/connect-sdk-4337
+      repo_leg: github-org:cometh-hq
+      publisher_leg: email:cometh.io
+      matched_by: domain
+    - name: '@cometh/hosted-sdk'
+      version: 0.3.2
+      released: '2026-04-17'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@cometh/hosted-sdk
+      repo_leg: github-org:cometh-hq
+      publisher_leg: email:cometh.io
+      matched_by: domain
+    - name: '@cometh/keystore-sdk'
+      version: 0.0.1
+      released: '2026-04-17'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@cometh/keystore-sdk
+      repo_leg: github-org:cometh-hq
+      publisher_leg: email:cometh.io
+      matched_by: domain
+    - name: '@cometh/rtn-4337'
+      version: 0.1.7
+      released: '2026-04-17'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@cometh/rtn-4337
+      repo_leg: github-org:cometh-hq
+      publisher_leg: email:cometh.io
+      matched_by: domain
+    - name: '@cometh/session-keys'
+      version: 0.0.1
+      released: '2026-04-17'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@cometh/session-keys
+      repo_leg: github-org:cometh-hq
+      publisher_leg: email:cometh.io
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
